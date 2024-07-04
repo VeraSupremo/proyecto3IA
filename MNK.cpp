@@ -189,6 +189,8 @@ void test(){
 
 void play(){
   State st;
+
+
   while(!st.full() && st.win()==0){
     st.print();cout<<endl;
     int best_x, best_y;
