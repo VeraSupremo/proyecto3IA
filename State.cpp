@@ -96,6 +96,7 @@
               if(State.sq[yY][xX] == MAX ) cuentaMAX++;
               else if(State.sq[yY][xX] == MIN ) cuentaMIN++;
               else cuentaVacia++;
+              // ahora se evaluaran para entregar puntajes, ver mañana ando morido de sueño 
             }
           }
         }
