@@ -79,7 +79,28 @@
   int State::eval() const
   {
     //IMPLEMENTAR
-    
+    int score= 0; 
+    //ahora toca recorrer los sentidos del tablero(?)       se utilizaran x e y para horizontal y diagonal ^w^
+    for(int y= 0; y <M; ++y){
+      for(int x= 0; x <N; ++x){
+        //ahora diagonal
+        for(int yY = -1; yY<=1; ++yY){
+          for(int xX = -1; xX <= 1; ++xX){
+            if(xX == 0 && yY== 0) continue;// esto evita que se este viendo la misma posicion ^w^
+            int cuentaMAX= 0,cuentaMIN = 0,cuentaVacia = 0;
+            for(int i= 0; i< K;++i){
+              int xX = x+i*xX;
+              int yY = y+i*yY;
+              if(xX < 0 || xX >= N || yY < 0 || yY >= M) break;
+
+              if(State.sq[yY][xX] == MAX ) cuentaMAX++;
+              else if(State.sq[yY][xX] == MIN ) cuentaMIN++;
+              else cuentaVacia++;
+            }
+          }
+        }
+      }
+    }
     return 0;
   }
 
