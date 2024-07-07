@@ -81,8 +81,8 @@
     //IMPLEMENTAR
     int score= 0; 
     //ahora toca recorrer los sentidos del tablero(?)       se utilizaran x e y para horizontal y diagonal ^w^
-    for(int y= 0; y <M; ++y){
-      for(int x= 0; x <N; ++x){
+   for(int y= 0; y <N; ++y){
+      for(int x= 0; x <M; ++x){
         //ahora diagonal
         for(int yY = -1; yY<=1; ++yY){
           for(int xX = -1; xX <= 1; ++xX){
@@ -100,12 +100,12 @@
                 cuentaMIN++; //suma un min cad avez que hay un o
               } 
               else cuentaVacia++;
-              // ahora se evaluaran para entregar puntajes, ver mañana ando morido de sueño 
+              // ahora se evaluaran para entregar puntajes el codigo evalua dos vecesl la linea por ende el puntaje sera 5 + 5 
               if(cuentaMAX == K-1 && cuentaVacia == 1){
-                score += 10;
+                score += 5;
               } 
               if(cuentaMIN == K-1 && cuentaVacia == 1){
-                score -= 10;
+                score -= 5;
               } 
               
             }
@@ -127,6 +127,7 @@
         //ahora diagonal
         for(int yY = -1; yY<=1; ++yY){
           for(int xX = -1; xX <= 1; ++xX){
+
             if(xX == 0 && yY== 0) continue;// esto evita que se este viendo la misma posicion ^w^
             int cuentaMAX= 0,cuentaMIN = 0,cuentaVacia = 0;
             for(int i= 0; i< K;++i){
@@ -135,15 +136,22 @@
               int _yY = y+i*yY;
               // cout<<"_xX: "<<_xX<<" _yY: "<<_yY<<endl;
               if(_xX < 0 || _xX >= M || _yY < 0 || _yY >= N) break;
-
-              if(sq[_yY][_xX] == MAX ) cuentaMAX++;
-              else if(sq[_yY][_xX] == MIN ) cuentaMIN++;
+              if(sq[_yY][_xX] == MAX ){
+                cuentaMAX++;
+              } 
+              else if(sq[_yY][_xX] == MIN ){
+                cuentaMIN++;
+              } 
               else cuentaVacia++;
 
               // cout<<"cuentaMAX: "<<cuentaMAX<<" cuentaMIN: "<<cuentaMIN<<" cuentaVacia: "<<cuentaVacia<<"["<<y<<"]["<<x<<"]"<<endl; 
               // ahora se evaluaran para entregar puntajes, ver mañana ando morido de sueño
-              if(cuentaMAX == K && cuentaVacia == 0) { return 10;}
-              if(cuentaMIN == K && cuentaVacia == 0) { return -10;}
+              if(cuentaMAX == K && cuentaVacia == 0){ 
+                return 10;
+              }
+              if(cuentaMIN == K && cuentaVacia == 0){
+                return -10;
+              }
             }
           }
         }
