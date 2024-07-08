@@ -66,8 +66,7 @@ int alphabeta(const State &st, int &best_x, int &best_y, int height, int alpha, 
   int valor;
   best_x=best_y=-1;
   for(int y=0;y<State::N;y++){
-    for (int x=0; x < State::M; x++)
-    {
+    for (int x=0; x < State::M; x++){
       State estado_nuevo = st;
       if(estado_nuevo.make_move(x,y)){
          valor = -alphabeta(estado_nuevo,best_x,best_y,height-1,-beta,-alpha);
@@ -111,14 +110,14 @@ void solve(const State & st)
       cout << "draw";
     } else {
       int best_x, best_y;
-      char tm = State::DISP[st.get_to_move()+1];
+      //char tm = State::DISP[st.get_to_move()+1];
       int v = negamax(st, best_x, best_y,i);
       if (v > 0) {
-        cout << tm << " wins with (" << best_x << "," << best_y << ")";
+        cout<< " wins with (" << best_x << "," << best_y << ")";
       } else if (v == 0) {
-        cout << tm << " draws with (" << best_x << "," << best_y  << ")";
+        cout << " draws with (" << best_x << "," << best_y  << ")";
       } else {
-        cout << tm << " Perdio :(";
+        cout << "1 Perdio :(";
       }
     }
     cout <<endl<< "Negamax Visited nodes: "<<evals<<endl;
@@ -127,20 +126,20 @@ void solve(const State & st)
     evals=0;
     //st.print();
     v = st.win();
-    if (v != 0) {
+    if(v != 0) {
       cout << "a player already won";
     } else if (st.full()) {
       cout << "draw";
     } else {
       int best_x, best_y;
-      char tm = State::DISP[st.get_to_move() + 1];
+      //char tm = State::DISP[st.get_to_move() + 1];
       int v = alphabeta(st, best_x, best_y,i, -100000, 100000);
-      if (v > 0) {
-        cout << tm << " wins with (" << best_x << "," << best_y << ")";
-      } else if (v == 0) {
-        cout << tm << " draws with (" << best_x << "," << best_y  << ")";
-      } else {
-        cout << tm << " loses";
+      if(v > 0){
+        cout << " wins with (" << best_x << "," << best_y << ")";
+      }else if (v == 0){
+        cout << " draws with (" << best_x << "," << best_y  << ")";
+      }else{
+        cout << "1 perdio :(";
       }
     }
     cout <<endl<< "Alphabeta Visited nodes: "<<evals<<endl;
@@ -210,7 +209,12 @@ void solve(const State & st)
      ----- \
      -----"
   };
-
+  std::vector<string> boards6{
+    "o-- \
+     -o- \
+     --o"
+       
+  };
 void test(){
   for (const string & s : boards3) {
     // construct state from string
@@ -222,6 +226,8 @@ void test(){
       st.print();
       cout<<st.win()<<endl;
       solve(st);
+      cout<<"\n\n";
+      cout<< st.eval()<<endl;
       cout << endl;
     }
     catch (InputException & e) {
