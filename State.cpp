@@ -93,10 +93,10 @@
               int yY = y+ i*yY;
               if(xX < 0 || xX >= N || yY < 0 || yY >= M) break;
 
-              if(State.sq[yY][xX] == MAX ){
+              if(sq[yY][xX] == MAX ){
                 cuentaMAX++;  //suma un min cad avez que hay un x
               } 
-              else if(State.sq[yY][xX] == MIN ){
+              else if(sq[yY][xX] == MIN ){
                 cuentaMIN++; //suma un min cad avez que hay un o
               } 
               else cuentaVacia++;
@@ -119,7 +119,7 @@
   int State::win() const
 {
   //IMPLEMENTAR
-    int score= 0;
+ 
     // score += 5; cout<<"SUMA"<<endl;
     //ahora toca recorrer los sentidos del tablero(?)       se utilizaran x e y para horizontal y diagonal ^w^
     for(int y= 0; y <N; ++y){
@@ -145,12 +145,13 @@
               else cuentaVacia++;
 
               // cout<<"cuentaMAX: "<<cuentaMAX<<" cuentaMIN: "<<cuentaMIN<<" cuentaVacia: "<<cuentaVacia<<"["<<y<<"]["<<x<<"]"<<endl; 
-              // ahora se evaluaran para entregar puntajes, ver mañana ando morido de sueño
+              // ahora se evaluaran para entregar quien gana
+              
               if(cuentaMAX == K && cuentaVacia == 0){ 
-                return 10;
+                return MAX;
               }
               if(cuentaMIN == K && cuentaVacia == 0){
-                return -10;
+                return MIN;
               }
             }
           }

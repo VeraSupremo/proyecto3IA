@@ -1,5 +1,3 @@
-
-
 #include <cassert>
 #include <cstring>
 #include <iostream>
@@ -26,22 +24,67 @@ int negamax(const State &st, int &best_x, int &best_y, int height)
 {
   best_x = best_y = -1; // no move yet 
   evals++;
-
   // if game ended or height reached, return value
   // if ( ) {
   // }
-
   //IMPLEMENTAR
-  
-  //return state score
-  return 0;
+  int wp = st.win();
+  if(wp!=0||height==0){
+    return wp * State::WIN;
+  }
+    //int max_valor = State::WIN
+   int max_valor = -State::WIN-1;
+   for(int y=0;y<State::N;y++){
+    for (int x=0; x < State::M; x++)
+    {
+      State estado_nuevo = st;
+      if(estado_nuevo.make_move(x,y)){
+        int valor = -negamax(estado_nuevo,best_x,best_y,height-1);
+        if(valor>max_valor){
+          max_valor=valor;
+          best_x=x;
+          best_y=y;
+        }
+      }
+    }
+    
+   } 
+  return max_valor;
 }
 
 // return state value [-WIN - WIN]in VIEW of the PLAYER to MOVE
 int alphabeta(const State &st, int &best_x, int &best_y, int height, int alpha, int beta)
 {
   //IMPLEMENTAR
-  return 0;
+ evals++;
+
+  int wp = st.win();
+  if(wp!=0||height==0){
+    return wp * State::WIN;
+  }
+
+  int valor;
+  best_x=best_y=-1;
+  for(int y=0;y<State::N;y++){
+    for (int x=0; x < State::M; x++)
+    {
+      State estado_nuevo = st;
+      if(estado_nuevo.make_move(x,y)){
+         valor = -alphabeta(estado_nuevo,best_x,best_y,height-1,-beta,-alpha);
+        if(valor>alpha){
+          alpha=valor;
+          best_x=x;
+          best_y=y;
+        }
+        if(alpha>=beta){
+          return alpha;
+        }
+      }
+    }
+    
+   } 
+
+  return alpha;
 }
 
 // solve position given in state st and print the following to stdout:
@@ -75,7 +118,7 @@ void solve(const State & st)
       } else if (v == 0) {
         cout << tm << " draws with (" << best_x << "," << best_y  << ")";
       } else {
-        cout << tm << " loses";
+        cout << tm << " Perdio :(";
       }
     }
     cout <<endl<< "Negamax Visited nodes: "<<evals<<endl;
