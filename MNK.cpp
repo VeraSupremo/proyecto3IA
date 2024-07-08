@@ -111,7 +111,7 @@ void solve(const State & st)
       cout << "draw";
     } else {
       int best_x, best_y;
-      char tm = State::DISP[st.get_to_move() + 1];
+      char tm = State::DISP[st.get_to_move()+1];
       int v = negamax(st, best_x, best_y,i);
       if (v > 0) {
         cout << tm << " wins with (" << best_x << "," << best_y << ")";
